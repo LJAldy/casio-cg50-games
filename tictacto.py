@@ -34,7 +34,11 @@ while True:
     cls()
     gameboard = []
     for i in range(9):
-        gameboard.append(" ")
+        gameboard.append("i")
+    printgameboard(gameboard)
+    input()
+    for i in range(9):
+        gameboard[i] = " "
     win = False
     for i in range(9):
         if i % 2 == 0:
