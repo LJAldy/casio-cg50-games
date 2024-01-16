@@ -1,6 +1,5 @@
 def overprint():
-    for i in range(2):
-        print("\n\n\n\n\n")
+    print("\n\n\n\n\n\n\n\n")
 
 alphabet = "abcdefghijklmnopqrstuvwxyz"
 
