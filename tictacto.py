@@ -1,5 +1,6 @@
 def cls():
-    print("\n\n\n\n\n\n\n\n")
+    print(7*"\n")
+boardindex = [6,7,8,3,4,5,0,1,2]
 def printgameboard(board):
     print(" " + board[0] + " | " + board[1] + " | " + board[2])
     print("---+---+---")
@@ -12,29 +13,16 @@ def winner(winpiece):
         return True
     return False
 def findwin(board):
-    if board[0] == board[1] and board[1] == board[2]:
-        return winner(board[0])
-    elif board[3] == board[4] and board[4] == board[5]:
-        return winner(board[3])
-    elif board[6] == board[7] and board[7] == board[8]:
-        return winner(board[6])
-    elif board[0] == board[3] and board[3] == board[6]:
-        return winner(board[0])
-    elif board[1] == board[4] and board[4] == board[7]:
-        return winner(board[1])
-    elif board[2] == board[5] and board[5] == board[8]:
-        return winner(board[2])
-    elif board[0] == board[4] and board[4] == board[8]:
-        return winner(board[0])
-    elif board[2] == board[4] and board[4] == board[6]:
-        return winner(board[2])
-    else:
-        return False
+    win_conditions = [(0, 1, 2), (3, 4, 5), (6, 7, 8), (0, 3, 6), (1, 4, 7), (2, 5, 8), (0, 4, 8), (2, 4, 6)]
+    for condition in win_conditions:
+        if board[condition[0]] == board[condition[1]] == board[condition[2]] and not board[condition[0]] == " ":
+            return winner(board[condition[0]])
+    return False
 while True:
     cls()
     gameboard = []
     for i in range(9):
-        gameboard.append("i")
+        gameboard.append(str(boardindex[i]+1))
     printgameboard(gameboard)
     input()
     for i in range(9):
@@ -51,17 +39,14 @@ while True:
             placement = input(token + ": Enter index: ")
             cls()
             if any(placement == str(x) for x in range(1,10)):
-                placement = int(placement)
-                if placement >= 1 and placement <= 9:
-                    if gameboard[placement-1] == " ":
-                        gameboard[placement-1] = token
-                        invalid = False
-                    else:
-                        print("Already piece there.")
+                placement = boardindex[int(placement)-1]
+                if gameboard[placement] == " ":
+                    gameboard[placement] = token
+                    invalid = False
                 else:
-                    print("Number between 1-9.")
+                    print("Already piece there.")
             else:
-                print("Not a number.")
+                print("Not a valid number.")
         if findwin(gameboard):
             break
     printgameboard(gameboard)

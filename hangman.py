@@ -1,16 +1,36 @@
 def overprint():
-    print("\n\n\n\n\n\n\n\n")
+    print(7*"\n")
 
 alphabet = "abcdefghijklmnopqrstuvwxyz"
-
+def printwordfunc(wordtoprint):
+    if len(wordtoprint) > 21:
+        lastspace = 0
+        for charnum in range(21):
+            if wordtoprint[charnum] in [" ","/"]:
+                lastspace = charnum
+        if lastspace == 0 or len(wordtoprint) - lastspace > 21:
+            newword = ""
+            for char in wordtoprint:
+                newword += char
+                if len(newword) == 21:
+                    newword += "\n"
+        else:
+            newword = ""
+            for char in wordtoprint:
+                newword += char
+                if len(newword) == lastspace+1:
+                    newword += "\n"
+        print(newword)
+    else:
+        print(wordtoprint)
 while True:
     overprint()
-    wordtoguess = "oooooooooooooooooooooooooooo"
+    wordtoguess = ""
     wordinvalid = True
     while wordinvalid:
         wordtoguess = input("Word: ")
         overprint()
-        if len(wordtoguess) <= 18:
+        if len(wordtoguess) <= 42:
             if len(wordtoguess) > 1:
                 guessed = []
                 wordinvalid = False
@@ -34,10 +54,12 @@ while True:
         printword = ""
         for blank in guessed:
             printword += str(blank)
-        print(printword)
+        printwordfunc(printword)
         printguessed = "Used: "
         for char in lettersguessed:
             printguessed += str(char)
+            if len(printguessed) == 21:
+                printguessed += "\n"
         print(printguessed)
         print("Mistakes: " + str(wrongnum))
         guess = input("Guess: ").lower()
@@ -58,14 +80,17 @@ while True:
                     wrongnum += 1
                 elif "_" not in guessed:
                     solved = True
-                    print("You solved the word! \nThe word was: \n'" + wordtoguess + "'")             
+                    print("You solved the word! \nThe word was:")
+                    printwordfunc(wordtoguess)
         elif len(guess) > 1:
             if guess == wordtoguess:
                 solved = True
-                print("You solved the word! \nThe word was: \n'" + wordtoguess + "'")
+                print("You solved the word! \nThe word was:")
+                printwordfunc(wordtoguess)
             else:
                 print("Not the word.")
                 wrongnum += 1
     if wrongnum > 9:
-        print("You did not solve it. \nThe word was: \n'" + wordtoguess + "'")
+        print("You did not solve it. \nThe word was:")
+        printwordfunc(wordtoguess)
     input()

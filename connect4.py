@@ -21,7 +21,7 @@ class Four_In_A_Row():
             fields[i] = list(range(6))
 
         def __repr__(self):
-            return "Welcome to 4-In-A-Row!"
+            return "\n\n\n\n\nWelcome to 4-In-A-Row!"
 
         #method to create a game field or clear the last for the next game
         def create_clear_game(self):
@@ -194,7 +194,7 @@ game = Four_In_A_Row()
 print(game)
 input()
 
-#player input name and token
+#player input name and token, modified so pretty much useless
 player1 = Player("one", 1)
 player2 = Player("two", 2)
 player1.token = "O"
