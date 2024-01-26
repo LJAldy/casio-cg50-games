@@ -6,11 +6,6 @@ class Player():
         def __init__(self, name, player_number):
             self.name = name
             self.player_number = player_number
-        
-        #message for start of the game
-        def __repr__(self):
-            return "{name} is playing as Player {number} with the \"{token}\" token.".format(name=self.name, number=self.player_number, token=self.token)
-        
             
 #class for the game
 class Four_In_A_Row():
@@ -33,35 +28,32 @@ class Four_In_A_Row():
             for i in range(6):
                 row = ""
                 for j in range(7):
-                    row += ("{field}".format(field=self.fields[j][i]))
+                    row += ("{field}".format(field=self.fields[j][i])) # format row display
                     row += "|"
                 row = row[:-1]
                 if i == 0:
                     row += "  Move:"
                 elif i == 1:
-                    row += "  {move}".format(move=move_num)
+                    row += "  {move}".format(move=(move_num+1)//2)
                 elif token_turn:
                     if i == 3:
                         row += "  Turn:"
                     elif i == 4:
                         row += "  {token}".format(token=token_turn)
                 print(row)
-            #print("1 2 3 4 5 6 7")
-        
+
         def edit_field(self, column_number, player_token):
             for i in range(6):
                 if self.fields[column_number - 1][-i - 1] == "-":
                     self.fields[column_number - 1][-i - 1] = player_token
                     break
-            #self.print_field()
-        
+
         #method for the gameplay
         def gameplay(self):
             #game preparation
             self.create_clear_game()
             #start of the game and player inputs
             move = 0
-            random_number = 1
             while move < 42:
                 move += 1
                 if move % 2 == 1:
@@ -70,7 +62,7 @@ class Four_In_A_Row():
                     current_player_token = player2.token
                 self.print_field(current_player_token,move)
                 chosen_column = input("1 2 3 4 5 6 7 : ")
-                while random_number < 10:
+                while True:
                     if chosen_column in ["1","2","3","4","5","6","7"]:
                         column_number= int(chosen_column)
                         if not self.fields[column_number - 1][0] != "-":
