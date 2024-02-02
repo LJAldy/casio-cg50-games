@@ -1,12 +1,28 @@
 import random
 
+import random
+
 def generate_secret_code(mode):
     if mode == 1:
-        return random.sample(range(6), 4)
+        return unique_random_sample(range(6), 4)
     elif mode == 2:
-        return random.sample(range(8), 4)
+        return unique_random_sample(range(8), 4)
     elif mode == 3:
-        return random.sample(range(10), 5)
+        return unique_random_sample(range(10), 5)
+
+def unique_random_sample(population, k):
+    if k > len(population):
+        raise ValueError("Sample size cannot be greater than population size.")
+    
+    indices = list(range(len(population)))
+    selected_indices = []
+
+    for _ in range(k):
+        selected_index = random.randint(0, len(indices) - 1)
+        selected_indices.append(indices[selected_index])
+        indices.remove(indices[selected_index])
+
+    return [population[i] for i in selected_indices]
 
 def evaluate_guess(secret_code, guess):
     correct_color_and_position = sum(1 for i, j in zip(secret_code, guess) if i == j)
