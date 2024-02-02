@@ -46,16 +46,19 @@ def get_player_guess(message,guesses_board):
     """Get the player's guess for row and column."""
     while True:
         display_board(guesses_board)
-        try:
-            rowcol = input(message + (10 - len(message))*" "+ " : ")
-            return int(rowcol[1]), int(rowcol[0])
-        except:
-            message = "Invalid."
+        rowcol = input(message + (10 - len(message))*" "+ " : ")
+        if len(rowcol) == 2:
+            try:
+                return int(rowcol[1]), int(rowcol[0])
+            except:
+                message = "Invalid."
+        else:
+            message = "Invalid"
 
 def battleship():
     invalidmode = True
     while invalidmode:
-        print("\n\n\n\n\n\nWelcome to Battleship\n[1] Small\n[2] Medium\n[3] Large\n[4] 1v1")
+        print("\n\n\n\n\n\nWelcome to Battleship\n[1] Small\n[2] Medium\n[3] Large")
         mode = input(" : ")
         if mode in ["1","2","3"]:
             if mode == "1":
