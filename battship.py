@@ -18,10 +18,10 @@ def display_board(board):
 
 def place_ship(board, length, index):
     """Randomly place a ship on the board."""
-    orientation = random.choice(['horizontal', 'vertical'])
-    if orientation == 'horizontal':
-        invalid_ship = True
-        while invalid_ship:
+    invalid_ship = True
+    while invalid_ship:
+        orientation = random.choice(['horizontal', 'vertical'])
+        if orientation == 'horizontal':
             row = random.randint(0, len(board) - 1)
             col = random.randint(0, len(board[0]) - length)
             invalid_ship = False
@@ -31,9 +31,7 @@ def place_ship(board, length, index):
             if not invalid_ship:
                 for i in range(length):
                     board[row][col + i] = str(index)
-    else:
-        invalid_ship = True
-        while invalid_ship:
+        else:
             row = random.randint(0, len(board) - length)
             col = random.randint(0, len(board[0]) - 1)
             invalid_ship = False
@@ -57,18 +55,22 @@ def get_player_guess(message,guesses_board):
 def battleship():
     invalidmode = True
     while invalidmode:
-        print("\n\n\n\n\n\nWelcome to Battleship\n[1] Small\n[2] Medium\n[3] Large")
+        print("\n\n\n\n\n\nWelcome to Battleship\n[1] Small\n[2] Medium\n[3] Large\n[4] 1v1")
         mode = input(" : ")
         if mode in ["1","2","3"]:
             if mode == "1":
                 rows, cols = 5, 5
-                ship_lengths = [3, 4, 2, 2]
+                ship_lengths = [4, 3, 2, 2]
             elif mode == "2":
                 rows, cols = 5, 8
-                ship_lengths = [3, 4, 2, 3, 4]
+                ship_lengths = [4, 4, 3, 3, 2]
             elif mode == "3":
                 rows, cols = 5, 10
-                ship_lengths = [3, 4, 2, 3, 4, 5]
+                ship_lengths = [5, 4, 4, 3, 3, 2]
+            elif mode == "4":
+                rows, cols = 5, 10
+                ship_lengths = [5, 4, 4, 3, 3, 2]
+                versus_mode = True
             invalidmode = False
     board = create_board(rows, cols)
     guesses_board = create_board(rows, cols)
