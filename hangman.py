@@ -28,7 +28,8 @@ while True:
     wordtoguess = ""
     wordinvalid = True
     while wordinvalid:
-        wordtoguess = input("Word: ")
+        print("Enter word to guess:")
+        wordtoguess = input()
         overprint()
         if len(wordtoguess) <= 42:
             if len(wordtoguess) > 1:
@@ -80,17 +81,19 @@ while True:
                     wrongnum += 1
                 elif "_" not in guessed:
                     solved = True
-                    print("You solved the word! \nThe word was:")
+                    print("You solved the word!\nThe word was:")
                     printwordfunc(wordtoguess)
         elif len(guess) > 1:
             if guess == wordtoguess:
                 solved = True
-                print("You solved the word! \nThe word was:")
+                print("You solved the word!\nThe word was:")
                 printwordfunc(wordtoguess)
+            elif len(guess) != len(wordtoguess):
+                print("Invalid guess.")
             else:
                 print("Not the word.")
                 wrongnum += 1
     if wrongnum > 9:
-        print("You did not solve it. \nThe word was:")
+        print("You did not solve it.\nThe word was:")
         printwordfunc(wordtoguess)
     input()
