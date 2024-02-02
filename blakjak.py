@@ -45,8 +45,8 @@ def blackjack():
         display_board(player_cards, dealer_cards)
 
         # Ask the player if they want to draw another card
-        draw_another = input("1=draw,2=pass: ")
-        if draw_another == "1":
+        draw_another = input("3 to draw: ")
+        if "3" in draw_another:
             player_cards.append(get_card())
         else:
             is_game_over = True
