@@ -1,15 +1,13 @@
-def cls():
-    print(7*"\n")
-boardindex = [6,7,8,3,4,5,0,1,2]
+BOARDINDEX = [6,7,8,3,4,5,0,1,2]
 def printgameboard(board):
     print(" " + board[0] + " | " + board[1] + " | " + board[2])
     print("---+---+---")
     print(" " + board[3] + " | " + board[4] + " | " + board[5])
     print("---+---+---")
     print(" " + board[6] + " | " + board[7] + " | " + board[8])
-def winner(winpiece):
-    if not winpiece == " ":
-        print("Player " + winpiece + " has won!")
+def winner(win_piece):
+    if not win_piece == " ":
+        print("Player " + win_piece + " has won!")
         return True
     return False
 def findwin(board):
@@ -19,10 +17,10 @@ def findwin(board):
             return winner(board[condition[0]])
     return False
 while True:
-    cls()
+    print(7*"\n")
     gameboard = []
     for i in range(9):
-        gameboard.append(str(boardindex[i]+1))
+        gameboard.append(str(BOARDINDEX[i]+1))
     printgameboard(gameboard)
     input()
     for i in range(9):
@@ -37,16 +35,16 @@ while True:
         while invalid:  
             printgameboard(gameboard)
             placement = input(token + ": Enter index: ")
-            cls()
+            print(7*"\n")
             if any(placement == str(x) for x in range(1,10)):
-                placement = boardindex[int(placement)-1]
+                placement = BOARDINDEX[int(placement)-1]
                 if gameboard[placement] == " ":
                     gameboard[placement] = token
                     invalid = False
                 else:
                     print("Already piece there.")
             else:
-                print("Not a valid number.")
+                print("Invalid index.")
         if findwin(gameboard):
             break
     printgameboard(gameboard)
